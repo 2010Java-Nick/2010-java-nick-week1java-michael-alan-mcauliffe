@@ -92,25 +92,19 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			if((this.sideOne == this.sideTwo) && (this.sideOne == this.sideThree)) {
-				return true;
-			}
-			return false;
+			return (this.sideOne == this.sideTwo && 
+					this.sideOne == this.sideThree);
 		}
 
 		public boolean isIsosceles() {
-			if((this.sideOne == this.sideTwo) ^ (this.sideOne == this.sideTwo) ^
-					(this.sideOne == this.sideThree) ^ (this.sideTwo == this.sideThree)) {
-				return true;
-			}
-			return false;
+			return (this.sideOne == this.sideTwo || 
+					this.sideOne == this.sideThree || 
+					this.sideTwo == this.sideThree);
 		}
 
 		public boolean isScalene() {
-			if((this.sideOne != this.sideTwo) && (this.sideTwo != this.sideThree)) {
-				return true;
-			}
-			return false;
+			return (this.sideOne != this.sideTwo && 
+					this.sideTwo != this.sideThree);
 		}
 
 	}
@@ -226,7 +220,7 @@ public class EvaluationService {
 		String[] words = string.replaceAll("[^a-zA-Z, ]", "").replaceAll(",", " ").split("\\s+");
 		
 		for(String strTemp : words) {
-			if(wordAndCountMap.get(strTemp)==null) {
+			if(wordAndCountMap.get(strTemp) == null) {
 				wordAndCountMap.put(strTemp, 1);
 			}
 			else {
