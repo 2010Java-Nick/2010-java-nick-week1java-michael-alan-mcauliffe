@@ -142,25 +142,28 @@ public class EvaluationService {
 		int wordScore = 0;
 		
 		for(char charTemp : string.toCharArray()) {
-			if(value1Letters.contains(Character.toString(charTemp).toUpperCase())) {
+			
+			String testChar = Character.toString(charTemp).toUpperCase();
+			
+			if(value1Letters.contains(testChar)) {
 				wordScore += 1;
 			}
-			else if(value2Letters.contains(Character.toString(charTemp).toUpperCase())) {
+			else if(value2Letters.contains(testChar)) {
 				wordScore += 2;
 			}
-			else if(value3Letters.contains(Character.toString(charTemp).toUpperCase())) {
+			else if(value3Letters.contains(testChar)) {
 				wordScore += 3;
 			}
-			else if(value4Letters.contains(Character.toString(charTemp).toUpperCase())) {
+			else if(value4Letters.contains(testChar)) {
 				wordScore += 4;
 			}
-			else if(value5Letters.contains(Character.toString(charTemp).toUpperCase())) {
+			else if(value5Letters.contains(testChar)) {
 				wordScore += 5;
 			}
-			else if(value8Letters.contains(Character.toString(charTemp).toUpperCase())) {
+			else if(value8Letters.contains(testChar)) {
 				wordScore += 8;
 			}
-			else if(value10Letters.contains(Character.toString(charTemp).toUpperCase())) {
+			else if(value10Letters.contains(testChar)) {
 				wordScore += 10;
 			}
 		}
