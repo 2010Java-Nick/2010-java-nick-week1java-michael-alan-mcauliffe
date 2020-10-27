@@ -130,8 +130,42 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		
+		String value1Letters = "AEIOULNRST";
+		String value2Letters = "DG";
+		String value3Letters = "BCMP";
+		String value4Letters = "FHVWY";
+		String value5Letters = "K";
+		String value8Letters = "JX";
+		String value10Letters = "QZ";
+		
+		int wordScore = 0;
+		
+		for(char charTemp : string.toCharArray()) {
+			if(value1Letters.contains(Character.toString(charTemp).toUpperCase())) {
+				wordScore += 1;
+			}
+			else if(value2Letters.contains(Character.toString(charTemp).toUpperCase())) {
+				wordScore += 2;
+			}
+			else if(value3Letters.contains(Character.toString(charTemp).toUpperCase())) {
+				wordScore += 3;
+			}
+			else if(value4Letters.contains(Character.toString(charTemp).toUpperCase())) {
+				wordScore += 4;
+			}
+			else if(value5Letters.contains(Character.toString(charTemp).toUpperCase())) {
+				wordScore += 5;
+			}
+			else if(value8Letters.contains(Character.toString(charTemp).toUpperCase())) {
+				wordScore += 8;
+			}
+			else if(value10Letters.contains(Character.toString(charTemp).toUpperCase())) {
+				wordScore += 10;
+			}
+		}
+		
+		return wordScore;
 	}
 
 	/**
