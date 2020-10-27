@@ -307,8 +307,29 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+		String[] wordList = string.split("\\s+");
+		string = "";
+		
+		for(String strTemp : wordList) {
+			for(;;) {
+				String vowels = "aeiou";
+				if(!vowels.contains(Character.toString(strTemp.charAt(0)))) {
+					strTemp = strTemp.substring(1) + strTemp.charAt(0);
+				}
+				else {
+					//Vowel exception for words with 'ui' such as 'quick'
+					if(strTemp.charAt(0) == 'u' && strTemp.charAt(1) == 'i') {
+						strTemp = strTemp.substring(1) + strTemp.charAt(0);
+					}
+					strTemp += "ay";
+					break;
+				}
+			}
+			string += strTemp + " ";
+		}
+		System.out.println(string.stripTrailing());
+		return string.stripTrailing();
 	}
 
 	/**
