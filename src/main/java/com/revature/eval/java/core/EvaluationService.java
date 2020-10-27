@@ -91,21 +91,22 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			if(this.sideOne == this.sideTwo && this.sideOne == this.sideThree) {
+			if((this.sideOne == this.sideTwo) && (this.sideOne == this.sideThree)) {
 				return true;
 			}
-			return false;			
+			return false;
 		}
 
 		public boolean isIsosceles() {
-			/*if(this.isEquilateral() || this.isScalene()) {
-				return false;
-			}*/
+			if((this.sideOne == this.sideTwo) ^ (this.sideOne == this.sideTwo) ^
+					(this.sideOne == this.sideThree) ^ (this.sideTwo == this.sideThree)) {
+				return true;
+			}
 			return false;
 		}
 
 		public boolean isScalene() {
-			if(this.sideOne != this.sideTwo && this.sideTwo != this.sideThree) {
+			if((this.sideOne != this.sideTwo) && (this.sideTwo != this.sideThree)) {
 				return true;
 			}
 			return false;
