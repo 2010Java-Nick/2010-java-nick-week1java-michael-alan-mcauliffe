@@ -132,41 +132,34 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		
-		String value1Letters = "AEIOULNRST";
-		String value2Letters = "DG";
-		String value3Letters = "BCMP";
-		String value4Letters = "FHVWY";
-		String value5Letters = "K";
-		String value8Letters = "JX";
-		String value10Letters = "QZ";
-		
 		int wordScore = 0;
 		
 		for(char charTemp : string.toCharArray()) {
 			
-			String testChar = Character.toString(charTemp).toUpperCase();
-			
-			if(value1Letters.contains(testChar)) {
-				wordScore += 1;
+			switch (Character.toString(charTemp).toUpperCase()) {
+				case "A": case "E": case "I": case "O": case "U": case "L": case "N": case "R": case "S": case "T":
+					wordScore += 1;
+					break;
+				case "D": case "G":
+					wordScore += 2;
+					break;
+				case "B": case "C": case "M": case "P":
+					wordScore += 3;
+					break;
+				case "F": case "H": case "V": case "W": case "Y":
+					wordScore += 4;
+					break;
+				case "K":
+					wordScore += 5;
+					break;
+				case "J": case "X":
+					wordScore += 8;
+					break;
+				case "Q": case "Z":
+					wordScore += 10;
+					break;
 			}
-			else if(value2Letters.contains(testChar)) {
-				wordScore += 2;
-			}
-			else if(value3Letters.contains(testChar)) {
-				wordScore += 3;
-			}
-			else if(value4Letters.contains(testChar)) {
-				wordScore += 4;
-			}
-			else if(value5Letters.contains(testChar)) {
-				wordScore += 5;
-			}
-			else if(value8Letters.contains(testChar)) {
-				wordScore += 8;
-			}
-			else if(value10Letters.contains(testChar)) {
-				wordScore += 10;
-			}
+
 		}
 		
 		return wordScore;
@@ -233,11 +226,11 @@ public class EvaluationService {
 		String[] words = string.replaceAll("[^a-zA-Z, ]", "").replaceAll(",", " ").split("\\s+");
 		
 		for(String strTemp : words) {
-			if(!wordAndCountMap.containsKey(strTemp)) {
+			if(wordAndCountMap.get(strTemp)==null) {
 				wordAndCountMap.put(strTemp, 1);
 			}
 			else {
-				wordAndCountMap.replace(strTemp, wordAndCountMap.get(strTemp) + 1);
+				wordAndCountMap.put(strTemp, wordAndCountMap.get(strTemp) + 1);
 			}
 		}
 		
