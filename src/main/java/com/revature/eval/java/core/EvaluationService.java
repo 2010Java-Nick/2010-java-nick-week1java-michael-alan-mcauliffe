@@ -376,7 +376,7 @@ public class EvaluationService {
 		for(long i = 2L; i <= l; i += 2) {
 			if(l % i == 0) {
 				primeFactors.add(i);
-				l -= l - l / i;
+				l = l / i;
 				i = 0L;
 			}
 			if(i == 2L) {
