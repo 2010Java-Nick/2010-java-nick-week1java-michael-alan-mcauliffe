@@ -267,7 +267,7 @@ public class EvaluationService {
 	 * binary search is a dichotomic divide and conquer search algorithm.
 	 * 
 	 */
-	static class BinarySearch<T> {
+	static class BinarySearch<T extends Comparable<T>> {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
@@ -422,8 +422,31 @@ public class EvaluationService {
 		}
 
 		public String rotate(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			
+			char[] stringAsCharArray = string.toCharArray();
+			int i = 0;			
+			
+			for(char charTemp : stringAsCharArray) {
+				
+				if(String.valueOf(charTemp).matches("[a-z]")) {
+					charTemp += this.key;
+					
+					if(charTemp > 'z') {
+						charTemp -= 26;
+					}
+				}
+				
+				if(String.valueOf(charTemp).matches("[A-Z]")) {
+					charTemp += this.key;
+					
+					if(charTemp> 'Z') {
+						charTemp -= 26;
+					}
+				}
+				stringAsCharArray[i] = charTemp;
+				i++;
+			}
+			return String.valueOf(stringAsCharArray);
 		}
 
 	}
