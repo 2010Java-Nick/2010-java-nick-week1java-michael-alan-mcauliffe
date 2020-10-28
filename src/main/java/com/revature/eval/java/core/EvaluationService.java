@@ -328,7 +328,6 @@ public class EvaluationService {
 			}
 			string += strTemp + " ";
 		}
-		System.out.println(string.stripTrailing());
 		return string.stripTrailing();
 	}
 
@@ -348,8 +347,15 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		
+		double tempNum = 0;
+		String numAsStr = Integer.toString(input);
+		
+		for(int i = 0; i < numAsStr.length(); i++) {
+			tempNum += Math.pow(Character.getNumericValue(numAsStr.charAt(i)), numAsStr.length());
+		}
+
+		return input == tempNum;
 	}
 
 	/**
