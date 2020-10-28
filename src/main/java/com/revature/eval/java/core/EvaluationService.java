@@ -373,7 +373,7 @@ public class EvaluationService {
 		
 		List<Long> primeFactors = new ArrayList<Long>();
 		
-		for(long i = 2L; i <= l; i += 2) {
+		for(long i = 2L; i <= l; i += 2L) {
 			if(l % i == 0) {
 				primeFactors.add(i);
 				l = l / i;
