@@ -548,7 +548,6 @@ public class EvaluationService {
 				
 				if((result.length() + 1) % 6 == 0) result += " ";
 			}
-			System.out.println(result.stripTrailing());
 			return result.stripTrailing();
 		}
 
@@ -602,8 +601,26 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isValidIsbn(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		
+		int result = 0;
+		
+		string = string.toUpperCase().replaceAll("[^0-9X]", "");
+		
+		if(string.length() != 10) return false;
+		
+		for(int i = 0; i < 10; i++) {
+			
+			if(string.charAt(i) == 'X') {
+				result =+ 10 * (10 - i);
+			}
+			else{
+				result += Character.valueOf(string.charAt(i)) * (10 - i);
+			}
+		}
+		
+		System.out.println(string);
+		if(result % 11 == 0) return true;
+		else return false;
 	}
 
 	/**
