@@ -677,7 +677,23 @@ public class EvaluationService {
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		
+		int sum = 0;
+		
+		for(int n = 1; n < i; n++) {
+			if(isMultiple(n, set)) sum += n;
+		}
+		
+		System.out.println(sum);
+		return sum;
+	}
+	
+	public boolean isMultiple(int n, int[] set) {
+		
+		for(int i : set) {
+			if(n % i == 0) return true;
+		}
+		return false;
 	}
 
 	/**
