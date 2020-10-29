@@ -646,8 +646,6 @@ public class EvaluationService {
 			}
 		}
 		
-		System.out.println(retreived);
-		
 		return retreived.equals(expected);
 	}
 
