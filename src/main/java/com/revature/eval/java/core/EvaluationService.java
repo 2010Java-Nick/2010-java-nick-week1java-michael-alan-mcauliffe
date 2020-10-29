@@ -618,7 +618,6 @@ public class EvaluationService {
 			}
 		}
 		
-		System.out.println(string);
 		if(result % 11 == 0) return true;
 		else return false;
 	}
@@ -637,8 +636,19 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+
+		String retreived = "";
+		String expected = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		
+		for(char i = 'A'; i <= 'Z'; i++) {
+			if(string.toUpperCase().contains(Character.toString(i))) {
+				retreived += i;
+			}
+		}
+		
+		System.out.println(retreived);
+		
+		return retreived.equals(expected);
 	}
 
 	/**
