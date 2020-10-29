@@ -4,7 +4,6 @@ import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -466,35 +465,30 @@ public class EvaluationService {
 	 */
 	public int calculateNthPrime(int i) {
 		
-		List<Integer> primes = new LinkedList<Integer>();
+		//TODO: Add functionality to iterate over array to reduce runtime.
+		
+		List<Integer> primes = new ArrayList<Integer>();
 		
 		if(i == 0) {
 			throw new IllegalArgumentException("Invaild entry");
 		}
 		
 		primes.add(2); //Add the first prime (2) if i != 0
-			
+		
 		for(int j = 3; primes.size() < i; j++) {
 			
-			int k = 0;
-
-			if(k < 3) {
-				k = 3;
-			}
-			
-			while(k <= j) {
+			for(int k = 3; k <= j; k += 2) {
+				
 				if(j % k == 0 && k != j){
+					
 					break;
 				}
 				else if (k == j) {
-					primes.add(j);
 					
+					primes.add(j);
 				}
-				k += 2;
 			}
-			
 		}
-		System.out.println(primes.get(primes.size() - 1));
 		return primes.get(primes.size() - 1);
 	}
 
