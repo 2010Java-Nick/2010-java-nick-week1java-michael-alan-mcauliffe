@@ -676,7 +676,6 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		// TODO Write an implementation for this method declaration
 		
 		int sum = 0;
 		
@@ -684,7 +683,6 @@ public class EvaluationService {
 			if(isMultiple(n, set)) sum += n;
 		}
 		
-		System.out.println(sum);
 		return sum;
 	}
 	
