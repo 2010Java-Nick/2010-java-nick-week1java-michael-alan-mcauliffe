@@ -524,9 +524,32 @@ public class EvaluationService {
 		 * @param string
 		 * @return
 		 */
+		
+		final static char[] KEY = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+		final static char [] CIPHER = "zyxwvutsrqponmlkjihgfedcba".toCharArray();
+		
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			
+			String result = "";
+			
+			for(char testChar : string.toLowerCase().toCharArray()) {
+				
+				for(int i = 0; i < 26; i++) {
+					
+					if(testChar == KEY[i]) {
+						result += CIPHER[i];
+						break;
+					}
+				}
+				
+				if (Character.toString(testChar).matches("[0-9]")) {
+					result += testChar;
+				}
+				
+				if((result.length() + 1) % 6 == 0) result += " ";
+			}
+			System.out.println(result.stripTrailing());
+			return result.stripTrailing();
 		}
 
 		/**
@@ -536,8 +559,23 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String decode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+
+			String result = "";
+			
+			for(char testChar : string.toLowerCase().toCharArray()) {
+				
+				for(int i = 0; i < 26; i++) {
+					
+					if(testChar == KEY[i]) {
+						result += CIPHER[i];
+						break;
+					}
+				}
+				if (Character.toString(testChar).matches("[0-9]")) {
+					result += testChar;
+				}
+			}
+			return result;
 		}
 	}
 
