@@ -731,8 +731,30 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isLuhnValid(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		
+		int result = 0;
+		
+		string = string.replaceAll(" ", "");
+		
+		if(!string.replaceAll("[0-9]", "").isEmpty()) return false;
+		
+		for(int i = string.length() - 1, count = 1; i >= 0 ; i--, count++) {
+			
+			int n = Character.getNumericValue(string.charAt(i));
+			
+			if(count % 2 != 0) {
+				
+				n += 2 * n;
+				
+				if(n > 9) {
+					n -= 9;
+				}
+			}
+
+			result += n;
+		}
+		
+		return result % 10 == 0;
 	}
 
 	/**
