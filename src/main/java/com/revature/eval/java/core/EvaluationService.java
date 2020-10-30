@@ -734,7 +734,7 @@ public class EvaluationService {
 		// Checks if given Temporal supports seconds and converts if it does not
 		if(!given.isSupported(ChronoUnit.SECONDS)) { 
 			
-			given = (LocalDateTime) LocalDate.from(given).atStartOfDay();
+			given = LocalDateTime.from(LocalDate.from(given).atStartOfDay());
 		} 
 
 		return given.plus(1_000_000_000, ChronoUnit.SECONDS);		
