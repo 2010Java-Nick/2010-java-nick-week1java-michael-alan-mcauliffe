@@ -865,7 +865,6 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	
 	public int solveWordProblem(String string) {
 		
 		int leftOperand, rightOperand;
