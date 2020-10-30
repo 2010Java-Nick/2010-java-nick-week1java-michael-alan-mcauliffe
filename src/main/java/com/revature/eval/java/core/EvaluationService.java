@@ -1,5 +1,7 @@
 package com.revature.eval.java.core;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -659,8 +661,23 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+		if(given instanceof LocalDateTime) { 
+			
+			return ((LocalDateTime) given).plusSeconds(1000000000);
+		} 
+
+		if(given instanceof LocalDate) {
+			
+			LocalDate localDate = (LocalDate) given;
+			
+			LocalDateTime localDateTime = LocalDateTime.of(localDate.getYear(),
+					localDate.getMonth(), localDate.getDayOfMonth(), 0, 0, 0);
+				
+			return (Temporal) localDateTime.plusSeconds(1000000000);
+		}
+		
+		return null;		
 	}
 
 	/**
