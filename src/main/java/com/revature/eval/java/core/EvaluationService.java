@@ -140,7 +140,8 @@ public class EvaluationService {
 			
 			// Value case for each letter
 			switch (Character.toString(charTemp).toUpperCase()) {
-				case "A": case "E": case "I": case "O": case "U": case "L": case "N": case "R": case "S": case "T":
+				case "A": case "E": case "I": case "O": case "U": case "L": case "N":
+				case "R": case "S": case "T":
 					wordScore += 1;
 					break;
 				case "D": case "G":
@@ -239,9 +240,9 @@ public class EvaluationService {
 			
 			// Adds new word to map
 			if(wordAndCountMap.get(strTemp) == null) {
+				
 				wordAndCountMap.put(strTemp, 0);
 			}
-			
 			// Increments each words' instances
 			wordAndCountMap.put(strTemp, wordAndCountMap.get(strTemp) + 1);
 		}
@@ -286,37 +287,30 @@ public class EvaluationService {
 	 */
 	static class BinarySearch<T extends Comparable<T>> {
 		private List<T> sortedList;
-		private T targetNum;
 
 		public int indexOf(T t) {
 			// TODO Write an implementation for this method declaration
-			
-			if(t instanceof List) {
+
+			int l = 0, r = sortedList.size() - 1;
+
+			while(l <= r){
 				
+				int m = l + (r - l) / 2;
 				
-			}
-			
-			else {
-				
-				this.targetNum = t;
-				
-				int midpoint = this.sortedList.size() / 2;
-				
-				if((T) this.sortedList.get(midpoint) == (T) targetNum) {
-					
-					return midpoint;
+				if(sortedList.get(m).compareTo(t) == 0) {
+					return m;
 				}
-				else if((Integer) this.sortedList.get(midpoint) < (Integer) targetNum){
-					
+				
+				else if(sortedList.get(m).compareTo(t) < 0) {
+					l = m + 1;
 					
 				}
-				else if((Integer) this.sortedList.get(midpoint) > (Integer) targetNum) {
-					
+				else if(sortedList.get(m).compareTo(t) > 0) {
+					r = m - 1; 
 					
 				}
-			}
-			
-			return 0;
+			}			
+			return -1;
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -773,7 +767,7 @@ public class EvaluationService {
 	 * @param set
 	 * @return
 	 */
-	public boolean isMultiple(int n, int[] set) {
+	private boolean isMultiple(int n, int[] set) {
 		
 		for(int i : set) {
 			
@@ -901,37 +895,21 @@ public class EvaluationService {
 				!operator.contains("minus") &&
 				!operator.contains("multi") &&
 				!operator.contains("divid"));
-		
-		if(operator.contains("plus")) {
-			
-			operator = "1";
-		}
-		else if(operator.contains("minus")) {
-			
-			operator = "2";
-		}
-		else if(operator.contains("multi")) {
-			
-			operator = "3";
-		}
-		else if(operator.contains("divid")) {
-			operator = "4";
-		}
-		
+
 		leftOperand = Integer.parseInt(getFromStack("[0-9]", "[0-9-]"));
 		
 		switch(operator) {
 		
-		case "1":
+		case "plus":
 			
 			return leftOperand + rightOperand;
-		case "2":
+		case "minus":
 			
 			return leftOperand - rightOperand;
-		case "3":
+		case "multiplied":
 			
 			return leftOperand * rightOperand;
-		case "4":
+		case "divided":
 			
 			return leftOperand / rightOperand;
 		default:
@@ -941,7 +919,7 @@ public class EvaluationService {
 
 	private Stack<Character> primarySk = new Stack<>();
 	
-	public String getFromStack(String regexIgnore, String regexGet) {
+	private String getFromStack(String regexIgnore, String regexGet) {
 		
 		Stack<Character> secondarySk = new Stack<>();
 		String string = "";
