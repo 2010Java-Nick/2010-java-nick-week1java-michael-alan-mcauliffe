@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 public class EvaluationService {
 
@@ -784,9 +785,87 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	
 	public int solveWordProblem(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		
+		int leftOperand, rightOperand;
+		String operator = "";
+		
+		this.primarySk.clear();
+		
+		for(char tempChar : string.toCharArray()) {
+			this.primarySk.push(tempChar);
+		}
+		
+		rightOperand = Integer.parseInt(getFromStack("[0-9]", "[0-9-]"));
+		
+		do {
+			if(this.primarySk.peek() == ' '){
+				operator = "";
+			}
+			operator = getFromStack("[a-zA-Z]", "[a-zA-Z]").toLowerCase();
+			
+		} while(!operator.contains("plus") &&
+				!operator.contains("minus") &&
+				!operator.contains("multi") &&
+				!operator.contains("divid"));
+		
+		if(operator.contains("plus")) {
+			
+			operator = "1";
+		}
+		else if(operator.contains("minus")) {
+			
+			operator = "2";
+		}
+		else if(operator.contains("multi")) {
+			
+			operator = "3";
+		}
+		else if(operator.contains("divid")) {
+			operator = "4";
+		}
+		
+		leftOperand = Integer.parseInt(getFromStack("[0-9]", "[0-9-]"));
+		
+		switch(operator) {
+		
+		case "1":
+			
+			return leftOperand + rightOperand;
+		case "2":
+			
+			return leftOperand - rightOperand;
+		case "3":
+			
+			return leftOperand * rightOperand;
+		case "4":
+			
+			return leftOperand / rightOperand;
+		default:
+			return 0;
+		}
 	}
 
+	private Stack<Character> primarySk = new Stack<>();
+	
+	public String getFromStack(String regexIgnore, String regexGet) {
+		
+		Stack<Character> secondarySk = new Stack<>();
+		String string = "";
+		
+		while(!Character.toString(this.primarySk.peek()).matches(regexIgnore)) {
+			this.primarySk.pop();
+		}
+		
+		while(Character.toString(this.primarySk.peek()).matches(regexGet)) {
+			secondarySk.push(this.primarySk.pop());
+		}
+		
+		while(!secondarySk.isEmpty()) {
+			string += secondarySk.pop();
+		}
+		
+		return string;
+	}
 }
