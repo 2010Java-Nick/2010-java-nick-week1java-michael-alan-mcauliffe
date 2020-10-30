@@ -785,25 +785,30 @@ public class EvaluationService {
 	public boolean isLuhnValid(String string) {
 		
 		int result = 0;
+		Stack<Integer> sk = new Stack<>();
 		
 		string = string.replaceAll(" ", "");
 		
 		if(!string.replaceAll("[0-9]", "").isEmpty()) return false;
 		
-		for(int i = string.length() - 1, count = 1; i >= 0 ; i--, count++) {
+		for(char tempInt : string.toCharArray()){
+			sk.push(Character.getNumericValue(tempInt));
+		}
+		
+		while(!sk.isEmpty()) {
 			
-			int n = Character.getNumericValue(string.charAt(i));
+			result += sk.pop();
 			
-			if(count % 2 != 0) {
+			if(!sk.isEmpty()) {
 				
-				n += 2 * n;
+				int n = sk.pop() * 2;
 				
 				if(n > 9) {
 					n -= 9;
 				}
+				
+				result += n;
 			}
-
-			result += n;
 		}
 		
 		return result % 10 == 0;
