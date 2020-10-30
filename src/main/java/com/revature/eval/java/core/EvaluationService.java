@@ -289,7 +289,6 @@ public class EvaluationService {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
 
 			int l = 0, r = sortedList.size() - 1;
 
