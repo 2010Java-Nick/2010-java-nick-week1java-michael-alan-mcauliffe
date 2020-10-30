@@ -610,19 +610,26 @@ public class EvaluationService {
 		string = string.toUpperCase().replaceAll("[^0-9X]", "");
 		
 		if(string.length() != 10) return false;
-		
+
 		for(int i = 0; i < 10; i++) {
 			
+			int n;
+			
 			if(string.charAt(i) == 'X') {
-				result =+ 10 * (10 - i);
+				
+				n = 10;
 			}
 			else{
-				result += Character.valueOf(string.charAt(i)) * (10 - i);
+				
+				n = Character.getNumericValue((string.charAt(i)));
 			}
+			
+			result += n * (10 - i);
 		}
 		
 		if(result % 11 == 0) return true;
-		else return false;
+		
+		return false;
 	}
 
 	/**
