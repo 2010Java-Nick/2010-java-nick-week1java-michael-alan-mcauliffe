@@ -749,33 +749,27 @@ public class EvaluationService {
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
 		
+		class Local{
+			boolean isMultiple(int n, int[] arr) {
+				
+				for(int i : arr) {
+					
+					if(n % i == 0) return true;
+				}
+				return false;
+			}
+		}
+		
 		int sum = 0;
 		
 		for(int n = 1; n < i; n++) {
 			
-			if(isMultiple(n, set)) sum += n;
+			if(new Local().isMultiple(n, set)) sum += n;
 		}
 		
 		return sum;
 	}
 	
-	/**
-	 * Method to return true if a given number is a multiple of any number
-	 * in a given array of numbers.
-	 * 
-	 * @param n
-	 * @param set
-	 * @return
-	 */
-	private boolean isMultiple(int n, int[] set) {
-		
-		for(int i : set) {
-			
-			if(n % i == 0) return true;
-		}
-		return false;
-	}
-
 	/**
 	 * 19. Given a number determine whether or not it is valid per the Luhn formula.
 	 * 
