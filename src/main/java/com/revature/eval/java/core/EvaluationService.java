@@ -272,9 +272,36 @@ public class EvaluationService {
 	 */
 	static class BinarySearch<T extends Comparable<T>> {
 		private List<T> sortedList;
+		private T targetNum;
 
 		public int indexOf(T t) {
 			// TODO Write an implementation for this method declaration
+			
+			if(t instanceof List) {
+				
+				
+			}
+			
+			else {
+				
+				this.targetNum = t;
+				
+				int midpoint = this.sortedList.size() / 2;
+				
+				if((T) this.sortedList.get(midpoint) == (T) targetNum) {
+					
+					return midpoint;
+				}
+				else if((Integer) this.sortedList.get(midpoint) < (Integer) targetNum){
+					
+					
+				}
+				else if((Integer) this.sortedList.get(midpoint) > (Integer) targetNum) {
+					
+					
+				}
+			}
+			
 			return 0;
 		}
 
