@@ -37,13 +37,16 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		
+		// Splits string at whitspaces and dashes into a string array
 		String arrWords[] = phrase.split("[ -]");
-		String acronym="";
 		
+		phrase=""; // Clears String
+		
+		// Adds first char of each string in array to phrase var
 		for(String strTemp : arrWords) {
-			acronym += strTemp.charAt(0);
+			phrase += strTemp.charAt(0);
 		}
-		return acronym.toUpperCase();
+		return phrase.toUpperCase();
 	}
 
 	/**
@@ -134,6 +137,7 @@ public class EvaluationService {
 		
 		for(char charTemp : string.toCharArray()) {
 			
+			// Value case for each letter
 			switch (Character.toString(charTemp).toUpperCase()) {
 				case "A": case "E": case "I": case "O": case "U": case "L": case "N": case "R": case "S": case "T":
 					wordScore += 1;
@@ -196,12 +200,14 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		
-		string = string.replaceAll("[^0-9]", "");
+		string = string.replaceAll("[^0-9]", ""); // Removes non numeric chars from string
 		
+		// Handler for removing NA country code from string
 		if(string.startsWith("1")) {
 			string = string.substring(1);
 		}
 		
+		// Checks that phone number string is the correct length
 		if(string.length() != 10) {
 			throw new IllegalArgumentException("Invaild entry");
 		}
@@ -221,15 +227,22 @@ public class EvaluationService {
 	public Map<String, Integer> wordCount(String string) {
 		
 		Map<String, Integer> wordAndCountMap = new HashMap<>();
+		
+		// Removes non alpha and spaces, replaces commas with spaces and splits the string
+		// at the whitespaces into a String array
 		String[] words = string.replaceAll("[^a-zA-Z, ]", "").replaceAll(",", " ").split("\\s+");
 		
+		// Identifies and adds unique words and increments every instance of those words
+		// into a HashMap
 		for(String strTemp : words) {
+			
+			// Adds new word to map
 			if(wordAndCountMap.get(strTemp) == null) {
-				wordAndCountMap.put(strTemp, 1);
+				wordAndCountMap.put(strTemp, 0);
 			}
-			else {
-				wordAndCountMap.put(strTemp, wordAndCountMap.get(strTemp) + 1);
-			}
+			
+			// Increments each words' instances
+			wordAndCountMap.put(strTemp, wordAndCountMap.get(strTemp) + 1);
 		}
 		
 		return wordAndCountMap;
@@ -339,26 +352,37 @@ public class EvaluationService {
 	 */
 	public String toPigLatin(String string) {
 		
+		// Splits string at whitespaces into a String array
 		String[] wordList = string.split("\\s+");
-		string = "";
+		String vowels = "aeiou";
+		string = ""; // Clears String
 		
+		// Loops through each word in wordList array
 		for(String strTemp : wordList) {
-			for(;;) {
-				String vowels = "aeiou";
+			
+			// Loops through given word to pig latin-ize it
+			for(boolean wordIsComplete = false; !wordIsComplete ; ) {
+				
+				// Moves beginning consonants to end of string
 				if(!vowels.contains(Character.toString(strTemp.charAt(0)))) {
 					strTemp = strTemp.substring(1) + strTemp.charAt(0);
 				}
+				// Finishes pig latin-izatin when word begins with vowel
 				else {
+					
 					//Vowel exception for words with 'ui' such as 'quick'
 					if(strTemp.charAt(0) == 'u' && strTemp.charAt(1) == 'i') {
 						strTemp = strTemp.substring(1) + strTemp.charAt(0);
 					}
+					
 					strTemp += "ay";
-					break;
+					wordIsComplete = true; // Ends pig latin-izer loop
 				}
 			}
+			
 			string += strTemp + " ";
 		}
+		
 		return string.stripTrailing();
 	}
 
@@ -404,16 +428,16 @@ public class EvaluationService {
 		List<Long> primeFactors = new ArrayList<Long>();
 		
 		for(long i = 2L; i <= l; i += 2L) {
+			
 			if(l % i == 0) {
+				
 				primeFactors.add(i);
 				l = l / i;
 				i = 0L;
 			}
-			if(i == 2L) {
-				i--;
-			}
-		}
-		
+			// Sets i to 1 to keep i odd after i == 2
+			if(i == 2L) i = 1;
+		}		
 		return primeFactors;
 	}
 
@@ -454,26 +478,34 @@ public class EvaluationService {
 		public String rotate(String string) {
 			
 			char[] stringAsCharArray = string.toCharArray();
-			int i = 0;			
+			int i = 0; // Used to traverse the char array
 			
 			for(char charTemp : stringAsCharArray) {
 				
+				// Checks for lowercase and adds key offset
 				if(String.valueOf(charTemp).matches("[a-z]")) {
+					
 					charTemp += this.key;
 					
+					// Corrects cipher rotation if char goes out of scope
 					if(charTemp > 'z') {
+						
 						charTemp -= 26;
 					}
 				}
 				
+				// Checks for uppercase and adds key offset
 				if(String.valueOf(charTemp).matches("[A-Z]")) {
+					
 					charTemp += this.key;
 					
+					// Corrects cipher rotation if char goes out of scope
 					if(charTemp> 'Z') {
+						
 						charTemp -= 26;
 					}
 				}
-				stringAsCharArray[i] = charTemp;
+				stringAsCharArray[i] = charTemp; // Adds cipher letter to array
 				i++;
 			}
 			return String.valueOf(stringAsCharArray);
@@ -634,8 +666,10 @@ public class EvaluationService {
 		
 		int result = 0;
 		
+		// Removes non numeric chars and 'X' from string
 		string = string.toUpperCase().replaceAll("[^0-9X]", "");
 		
+		// Checks for expected String length
 		if(string.length() != 10) return false;
 
 		for(int i = 0; i < 10; i++) {
@@ -696,11 +730,13 @@ public class EvaluationService {
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
 		
+		// Checks if given Temporal is LocalDateTime type
 		if(given instanceof LocalDateTime) { 
 			
 			return ((LocalDateTime) given).plusSeconds(1000000000);
 		} 
 
+		// If given Temporal is LocalDate type, converts to LocalDateTime type 
 		if(given instanceof LocalDate) {
 			
 			LocalDate localDate = (LocalDate) given;
@@ -732,15 +768,25 @@ public class EvaluationService {
 		int sum = 0;
 		
 		for(int n = 1; n < i; n++) {
+			
 			if(isMultiple(n, set)) sum += n;
 		}
 		
 		return sum;
 	}
 	
+	/**
+	 * Method to return true if a given number is a multiple of any number
+	 * in a given array of numbers.
+	 * 
+	 * @param n
+	 * @param set
+	 * @return
+	 */
 	public boolean isMultiple(int n, int[] set) {
 		
 		for(int i : set) {
+			
 			if(n % i == 0) return true;
 		}
 		return false;
